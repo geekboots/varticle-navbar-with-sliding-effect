@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical NavBar with Sliding Effect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #f2f2f2;
+        }
+
+        :root {
+            --red: #e44134;
+            --gray: #2b2b2b;
+            --white: #fff;
+            --transWhite: rgba(255,255,255, 0.1);
+        }
+
+        section#mainArea {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        section#mainArea nav {
+            width: 250px;
+            position: absolute;
+            left: -250px;
+            top: 0;
+            bottom: 0;
+            background-color: var(--red);
+            transition: 0.3s all ease-in-out;
+        }
+
+        section#mainArea.active nav {
+            left: 0;
+        }
+
+        #menuBtn {
+            position: absolute;
+            right: -30px;
+            top: 5px;
+            width: 30px;
+            height: 25px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        #menuBtn span {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--gray);
+            transition: 0.2s all ease;
+        }
+
+        #menuBtn span:nth-child(1) {
+            transform: translateY(-10px);
+        }
+
+        #menuBtn span:nth-child(2) {
+            transform: translateY(10px);
+        }
+
+        #menuBtn:hover span:nth-child(1) {
+            transform: translateY(-13px);
+        }
+
+        #menuBtn:hover span:nth-child(2) {
+            transform: translateY(13px);
+        }
+
+        #menuBtn.active span:nth-child(1) {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+
+        #menuBtn.active span:nth-child(2) {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        #menuBtn span:nth-child(3),
+        #menuBtn span:nth-child(4) {
+            transform: rotate(0deg);
+        }
+
+        #menuBtn.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        #menuBtn.active span:nth-child(4) {
+            transform: rotate(45deg);
+        }
+
+        #menuList {
+            list-style: none;
+        }
+
+        #menuList li {
+            margin: 8px 0;
+            position: relative;
+            background-color: var(--transWhite);
+            overflow: hidden;
+        }
+
+        #menuList li::before {
+            position: absolute;
+            content: '';
+            height: 3px;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            background-color: var(--white);
+            transition: 0.3s all ease-in-out;
+        }
+
+        #menuList li:hover::before {
+            border-radius: 0 50px 50px 0;
+            width: 110%;
+        }
+
+        #menuList li.active::before {
+            width: 80%;
+        }
+
+        #menuList li a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        section#mainArea #contentArea {
+            width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            transition: 0.3s all ease-in-out;
+        }
+
+        section#mainArea.active #contentArea {
+            width: calc(100% - 250px);
+        }
+
+        section#mainArea #contentArea .inner {
+            padding: 50px;
+        }
+
+        section#mainArea #contentArea h1 {
+            font-size: 30px;
+            color: var(--red);
+            margin-bottom: 8px;
+        }
+
+        section#mainArea #contentArea p {
+            font-size: 18px;
+            color: var(--gray);
+            line-height: 30px;
+        }
+    </style>
+
+    <script>
+        function toggleMenu() {
+            let menuBtn = document.getElementById('menuBtn');
+            let mainArea = document.getElementById('mainArea');
+            menuBtn.classList.toggle('active');
+            mainArea.classList.toggle('active');
+        }
+    </script>
+</head>
+<body>
+    <section id="mainArea">
+        <nav>
+            <button type="button" id="menuBtn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="menuList">
+                <li>
+                    <a href="">Dashboard</a>
+                </li>
+                <li class="active">
+                    <a href="">Product</a>
+                </li>
+                <li>
+                    <a href="">Order List</a>
+                </li>
+                <li>
+                    <a href="">Analytics</a>
+                </li>
+                <li>
+                    <a href="">Settings</a>
+                </li>
+            </ul>
+        </nav>
+        <section id="contentArea">
+            <div class="inner">
+                <h1>Lorem ipsum dolor sit amet</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum quod sapiente sit odio atque aliquid ipsa sint accusantium. Impedit distinctio quasi accusamus maxime autem veniam, fuga voluptatum officia reprehenderit commodi?</p>
+            </div>
+        </section>
+    </section>
+</body>
+</html>
